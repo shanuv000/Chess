@@ -1,16 +1,26 @@
 import React from "react";
-import { FirebaseApp } from "firebase/app";
+import { Route, Routes, Link } from "react-router-dom";
+import Home from "./Pages/Home";
+import Admin from "./Pages/Admin";
 import { chessId, imagess } from "./assets/assets";
 import Chess from "./Components/Chess";
-import AddChess from "./Components/AddChess";
+import AddChess from "./Components/admininstrator/AddChess";
 function App() {
   return (
-    <div className="App">
-      <div className="container-lg-fluid text-center">
-        <h1 className="mt-1  text-center">Chess games</h1>
-        <AddChess /> <Chess />
-      </div>
-    </div>
+    <>
+      {/* <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+            <Link to="/admin">admin</Link>
+          </li>
+        </ul>
+      </nav> */}
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/admin" element={<Admin />}></Route>
+      </Routes>
+    </>
   );
 }
 
