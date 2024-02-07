@@ -13,10 +13,12 @@ const AddChess = () => {
       await addDoc(chessCollectionRef, {
         gameNum: newChessId,
       });
+
       //   getMovieList();
     } catch (err) {
       console.err(err);
     }
+    setNewChessId("");
   };
 
   return (
