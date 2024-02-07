@@ -1,5 +1,3 @@
-import React from "react";
-
 export const chessId = [
   "11482773",
   "11482933",
