@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Shanu Chess",
+  "name": "Shanu Chess",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "./chess/chess/png-transparent-chess-piece-pawn-white-and-black-in-chess-international-chess-king-sport-product-thumbnail.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "./chess/chess/png-transparent-chess-piece-pawn-white-and-black-in-chess-international-chess-king-sport-product-thumbnail.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "./chess/chess/png-transparent-chess-piece-pawn-white-and-black-in-chess-international-chess-king-sport-product-thumbnail.png",
       "type": "image/png",
       "sizes": "512x512"
     }
