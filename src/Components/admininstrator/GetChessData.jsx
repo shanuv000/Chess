@@ -1,9 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebase";
-import { getDocs, collection } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  deleteDoc,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 const GetChessData = () => {
   const [chessListId, setChessListId] = useState([]);
+  const [updateChessId, setUpdateChessId] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
 
   const chessCollectionRef = collection(db, "chess");
   const getChessList = async () => {
@@ -25,13 +33,37 @@ const GetChessData = () => {
   useEffect(() => {
     getChessList();
   }, []);
+
+  // Delete Chess
+  const deleteChess = async (id) => {
+    try {
+      const chessDoc = doc(db, "chess", id);
+      await deleteDoc(chessDoc);
+      getChessList();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //Update Chess
+  const updateChess = async (id) => {
+    try {
+      const chessDoc = doc(db, "chess", id);
+      await updateDoc(chessDoc, { gameNum: updateChessId });
+      getChessList();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   var i = 0;
   return (
     <table class="table">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="Chess ID">First</th>
+          <th scope="Chess ID">Chess Id</th>
+          <th scope="delete">Delete</th>
+          <th scope="Edit">Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -41,28 +73,31 @@ const GetChessData = () => {
             <tr key={ids.id}>
               <th scope="row">{i}</th>
               <td>{ids.gameNum}</td>
+              <td>
+                <button onClick={() => deleteChess(ids.id)}>Del</button>
+              </td>
+              <td>
+                {isVisible && (
+                  <>
+                    <input
+                      placeholder="Update title"
+                      onChange={(e) => setUpdateChessId(e.target.value)}
+                    />
+
+                    <button onClick={() => updateChess(ids.id)}>
+                      Upadte {ids.gameNum}
+                    </button>
+                  </>
+                )}
+                {!isVisible && (
+                  <button onClick={() => setIsVisible(true)}>Edit</button>
+                )}
+              </td>
             </tr>
           );
         })}
       </tbody>
       ;
-      {/* <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr> */}
     </table>
   );
 };
