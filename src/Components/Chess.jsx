@@ -2,11 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { db } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
+import Loader from "./Loader";
 
 const Chess = () => {
   const [chessListId, setChessListId] = useState([]);
   const chessCollectionRef = collection(db, "chess");
-
+  const [load, setLoad] = useState(0);
   // Getting Chess Data
 
   const getChessList = async () => {
@@ -27,7 +28,14 @@ const Chess = () => {
   };
   useEffect(() => {
     getChessList();
+    setTimeout(() => {
+      setLoad(1);
+    }, 2000);
   }, []);
+
+  if (load === 0) {
+    return <Loader />;
+  }
 
   return (
     <div className="row">
