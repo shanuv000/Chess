@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { db } from "../../config/firebase";
+import FirebaseContext from "../../context/FirebaseContext";
 import {
   getDocs,
   collection,
@@ -9,37 +10,46 @@ import {
   doc,
 } from "firebase/firestore";
 const GetChessData = () => {
+  const { getChessList } = useContext(FirebaseContext);
   const [chessListId, setChessListId] = useState([]);
+
   const [updateChessId, setUpdateChessId] = useState("");
   const [isVisible, setIsVisible] = useState(false);
 
-  const chessCollectionRef = collection(db, "chess");
-  const getChessList = async () => {
-    // Read the Data
-    // Set the movie list
-    try {
-      const data = await getDocs(chessCollectionRef);
-      const filterData = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setChessListId(filterData);
+  // const chessCollectionRef = collection(db, "chess");
+  // const getChessList = async () => {
+  //   // Read the Data
+  //   // Set the movie list
+  //   try {
+  //     const data = await getDocs(chessCollectionRef);
+  //     const filterData = data.docs.map((doc) => ({
+  //       ...doc.data(),
+  //       id: doc.id,
+  //     }));
+  //     setChessListId(filterData);
 
-      console.log(filterData);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     console.log(filterData);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
   useEffect(() => {
-    getChessList();
-  }, []);
+    // console.log(getChessList);
 
+    // const deta = getChessList();
+    // const deta =
+    getChessList().then((val) => setChessListId(val));
+    // console.log("deta", deta);
+
+    // setChessListId(deta);
+  }, []);
+  console.log(chessListId);
   // Delete Chess
   const deleteChess = async (id) => {
     try {
       const chessDoc = doc(db, "chess", id);
       await deleteDoc(chessDoc);
-      getChessList();
+      getChessList().then();
     } catch (error) {
       console.error(error);
     }

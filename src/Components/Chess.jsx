@@ -21,7 +21,7 @@ const Chess = () => {
       }));
       setChessListId(filterData);
 
-      console.log(filterData);
+      // console.log(filterData);
     } catch (err) {
       console.error(err);
     }

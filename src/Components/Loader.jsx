@@ -1,5 +1,5 @@
 import React from "react";
-import { BallTriangle, DNA, Bars } from "react-loader-spinner";
+import { Bars } from "react-loader-spinner";
 
 const Loader = () => {
   const height = window.innerHeight / 2;
