@@ -10,52 +10,17 @@ import {
   doc,
 } from "firebase/firestore";
 const GetChessData = () => {
-  const { getChessList } = useContext(FirebaseContext);
+  const { getChessList, DeleteChess } = useContext(FirebaseContext);
   const [chessListId, setChessListId] = useState([]);
 
   const [updateChessId, setUpdateChessId] = useState("");
   const [isVisible, setIsVisible] = useState(false);
 
-  // const chessCollectionRef = collection(db, "chess");
-  // const getChessList = async () => {
-  //   // Read the Data
-  //   // Set the movie list
-  //   try {
-  //     const data = await getDocs(chessCollectionRef);
-  //     const filterData = data.docs.map((doc) => ({
-  //       ...doc.data(),
-  //       id: doc.id,
-  //     }));
-  //     setChessListId(filterData);
-
-  //     console.log(filterData);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
   useEffect(() => {
-    // console.log(getChessList);
-
-    // const deta = getChessList();
-    // const deta =
     getChessList().then((val) => setChessListId(val));
-    // console.log("deta", deta);
-
-    // setChessListId(deta);
   }, []);
-  console.log(chessListId);
-  // Delete Chess
-  const deleteChess = async (id) => {
-    try {
-      const chessDoc = doc(db, "chess", id);
-      await deleteDoc(chessDoc);
-      getChessList().then();
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  //Update Chess
+  // Update Chess
   const updateChess = async (id) => {
     try {
       const chessDoc = doc(db, "chess", id);
@@ -65,6 +30,7 @@ const GetChessData = () => {
       console.error(error);
     }
   };
+
   var i = 0;
   return (
     <table class="table">
@@ -84,7 +50,7 @@ const GetChessData = () => {
               <th scope="row">{i}</th>
               <td>{ids.gameNum}</td>
               <td>
-                <button onClick={() => deleteChess(ids.id)}>Del</button>
+                <button onClick={() => DeleteChess(ids.id)}>Del</button>
               </td>
               <td>
                 {isVisible && (
@@ -107,7 +73,6 @@ const GetChessData = () => {
           );
         })}
       </tbody>
-      ;
     </table>
   );
 };
