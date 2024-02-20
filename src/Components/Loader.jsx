@@ -6,7 +6,7 @@ const Loader = () => {
   //   const width = window.innerWidth;
   console.log("Height is -> " + height);
   return (
-    <div className="d-flex justify-content-center">
+    <div className="container d-flex justify-content-center ">
       <Bars
         height={height}
         width="80"

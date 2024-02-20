@@ -38,10 +38,10 @@ const Chess = () => {
   }
 
   return (
-    <div className="row">
+    <div className="row p-1">
       {chessListId.map((ids) => {
         return (
-          <div className="col-sm-12  col-lg-4  mt-sm-1 mt-lg-4">
+          <div className="col-sm-12  col-lg-4  mt-sm-1 mt-lg-2 ">
             <iframe
               // className="ratio ratio-1x1"
               title={`chess ${ids.id}`}
@@ -51,7 +51,7 @@ const Chess = () => {
               style={{
                 width: "100%",
                 border: "none",
-                height: "750px",
+                height: "700px",
                 // height='100%'
               }}
               src={`//www.chess.com/emboard?id=${ids.gameNum}`}
