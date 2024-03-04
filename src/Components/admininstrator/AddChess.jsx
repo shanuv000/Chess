@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { db } from "../../config/firebase";
 import GetChessData from "./GetChessData";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const AddChess = () => {
   const [newChessId, setNewChessId] = useState(0);
@@ -29,6 +29,7 @@ const AddChess = () => {
     try {
       await addDoc(chessCollectionRef, {
         gameNum: newChessId,
+        timestamp: serverTimestamp(),
       });
 
       //   getMovieList();
@@ -41,7 +42,7 @@ const AddChess = () => {
   return (
     <div className="container text-center mt-4">
       <div className="row">
-        <div className="col-auto">
+        <div className="col-8">
           <input
             class="form-control"
             type="text"
@@ -50,18 +51,18 @@ const AddChess = () => {
           />
           <button
             type="button"
-            class="btn btn-outline-primary "
+            class="btn btn-outline-primary m-2"
             onClick={onAddChessId}
           >
             Submit
           </button>
           {isEmpty && (
-            <div class="alert alert-danger mt-2 col-6 " role="alert">
+            <div class="alert alert-danger mt-2  " role="alert">
               Please Insert valid inputs..
             </div>
           )}
         </div>
-        <div className="col-auto">
+        <div className="col-12">
           <GetChessData />
         </div>
       </div>

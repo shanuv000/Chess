@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment"; // Import the moment library
 import { useState, useEffect } from "react";
 import { db } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
@@ -41,10 +42,13 @@ const Chess = () => {
     <div className="row p-1">
       {chessListId.map((ids) => {
         return (
-          <div
-            className="col-sm-12  col-lg-4  mt-sm-1 mt-lg-2 
-          "
-          >
+          <div className="col-sm-12  col-lg-4  mt-sm-1 mt-lg-2 ">
+            {console.log(ids.timestamp)}
+            <p style={{ color: "blue" }}>
+              {ids.timestamp
+                ? moment(ids.timestamp.toDate()).format("MMM Do YY")
+                : moment().format("MMM Do YY")}
+            </p>
             <iframe
               // className="ratio ratio-1x1"
               title={`chess ${ids.id}`}
