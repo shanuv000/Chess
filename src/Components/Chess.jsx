@@ -43,7 +43,7 @@ const Chess = () => {
       {chessListId.map((ids) => {
         return (
           <div className="col-sm-12  col-lg-4  mt-sm-1 mt-lg-2 ">
-            {console.log(ids.timestamp)}
+            {/* {console.log(ids.timestamp)} */}
             <p style={{ color: "blue" }}>
               {ids.timestamp
                 ? moment(ids.timestamp.toDate()).format("MMM Do YY")

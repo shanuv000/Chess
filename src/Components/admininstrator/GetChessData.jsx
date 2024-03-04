@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useState, useEffect } from "react";
+import moment from "moment";
 import { db } from "../../config/firebase";
 import FirebaseContext from "../../context/FirebaseContext";
 import {
@@ -38,6 +39,7 @@ const GetChessData = () => {
         <tr>
           <th scope="col">#</th>
           <th scope="Chess ID">Chess Id</th>
+          <th scope="Date">Added On</th>
           <th scope="delete">Delete</th>
           <th scope="Edit">Edit</th>
         </tr>
@@ -49,6 +51,11 @@ const GetChessData = () => {
             <tr key={ids.id}>
               <th scope="row">{i}</th>
               <td>{ids.gameNum}</td>
+              <td>
+                {ids.timestamp
+                  ? moment(ids.timestamp.toDate()).calendar()
+                  : moment().calendar()}
+              </td>
               <td>
                 <button onClick={() => DeleteChess(ids.id)}>Del</button>
               </td>
