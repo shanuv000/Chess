@@ -4,9 +4,10 @@ import { useState } from "react";
 import { db } from "../../config/firebase";
 import GetChessData from "./GetChessData";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { useEffect } from "react";
 
 const AddChess = () => {
-  const [newChessId, setNewChessId] = useState(0);
+  const [newChessId, setNewChessId] = useState("");
   const chessCollectionRef = collection(db, "chess");
   const [isEmpty, setIsEmpty] = useState(false);
   // const quantity = 11497655;
@@ -19,7 +20,7 @@ const AddChess = () => {
       newChessId.toString().length !== 8
     ) {
       setIsEmpty(true);
-      setNewChessId(0);
+      setNewChessId("");
       setTimeout(() => {
         setIsEmpty(false);
       }, 3000);
@@ -36,7 +37,7 @@ const AddChess = () => {
     } catch (err) {
       console.err(err);
     }
-    setNewChessId(0);
+    await setNewChessId("");
   };
 
   return (
@@ -47,6 +48,7 @@ const AddChess = () => {
             class="form-control"
             type="text"
             placeholder="Enter game Id"
+            value={newChessId}
             onChange={(e) => setNewChessId(e.target.value)}
           />
           <button
