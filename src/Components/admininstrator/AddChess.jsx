@@ -47,6 +47,7 @@ const AddChess = () => {
           <input
             class="form-control"
             type="text"
+            inputMode="numeric"
             placeholder="Enter game Id"
             value={newChessId}
             onChange={(e) => setNewChessId(e.target.value)}
