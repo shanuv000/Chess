@@ -11,10 +11,12 @@ import {
 } from "firebase/firestore";
 
 const GetChessData = () => {
-  const { getChessList, DeleteChess } = useContext(FirebaseContext);
+  const { getChessList } = useContext(FirebaseContext);
   const [chessList, setChessList] = useState([]);
   const [editChessId, setEditChessId] = useState("");
   const [updatedGameNum, setUpdatedGameNum] = useState("");
+  const [deleteConfirmationId, setDeleteConfirmationId] = useState(null);
+
   const fetchChessList = async () => {
     try {
       const chessCollection = collection(db, "chess");
@@ -28,9 +30,10 @@ const GetChessData = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     fetchChessList();
-  }, [getChessList]); // Include getChessList in the dependency array
+  }, []); // Fetch the chess list once when the component mounts
 
   const handleEditToggle = (id, gameNum) => {
     setEditChessId(id);
@@ -43,59 +46,88 @@ const GetChessData = () => {
       await updateDoc(chessDoc, { gameNum: updatedGameNum });
       setEditChessId("");
       setUpdatedGameNum("");
-      getChessList();
       fetchChessList();
     } catch (error) {
       console.error(error);
     }
   };
 
+  const handleDeleteConfirmation = (id) => {
+    setDeleteConfirmationId(id);
+  };
+
+  const handleDeleteChess = async (id) => {
+    try {
+      await deleteDoc(doc(db, "chess", id));
+      setChessList((prevList) => prevList.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setDeleteConfirmationId(null);
+    }
+  };
+
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="Chess ID">Chess Id</th>
-          <th scope="Date">Added On</th>
-          <th scope="delete">Delete</th>
-          <th scope="Edit">Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        {chessList.map((chess, index) => (
-          <tr key={chess.id}>
-            <th scope="row">{index + 1}</th>
-            <td>{chess.gameNum}</td>
-            <td>
-              {chess.timestamp
-                ? moment(chess.timestamp.toDate()).calendar()
-                : moment().calendar()}
-            </td>
-            <td>
-              <button onClick={() => DeleteChess(chess.id)}>Del</button>
-            </td>
-            <td>
-              {editChessId === chess.id ? (
-                <>
-                  <input
-                    placeholder="Update title"
-                    value={updatedGameNum}
-                    onChange={(e) => setUpdatedGameNum(e.target.value)}
-                  />
-                  <button onClick={handleUpdateChess}>Update</button>
-                </>
-              ) : (
-                <button
-                  onClick={() => handleEditToggle(chess.id, chess.gameNum)}
-                >
-                  Edit
-                </button>
-              )}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="container mt-4">
+      <h2 className="text-center mb-4">Chess Game List</h2>
+      <div className="table-responsive">
+        <table className="table table-striped table-bordered">
+          <thead className="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Chess ID</th>
+              <th scope="col">Added On</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {chessList.map((chess, index) => (
+              <tr key={chess.id}>
+                <th scope="row">{index + 1}</th>
+                <td>{chess.gameNum}</td>
+                <td>
+                  {chess.timestamp ? (
+                    <>{moment(chess.timestamp.toDate()).calendar()}</>
+                  ) : (
+                    <>No timestamp available</>
+                  )}
+                </td>
+                <td>
+                  <div className="btn-group" role="group">
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleDeleteConfirmation(chess.id)}
+                    >
+                      Delete
+                    </button>
+                    <button
+                      className="btn btn-warning btn-sm"
+                      onClick={() => handleEditToggle(chess.id, chess.gameNum)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+
+                  {/* Deletion Confirmation Modal */}
+                  {deleteConfirmationId === chess.id && (
+                    <div
+                      className="modal fade show"
+                      tabIndex="-1"
+                      role="dialog"
+                      aria-labelledby="deleteConfirmationModal"
+                      style={{ display: "block" }}
+                    >
+                      {/* Modal Content */}
+                    </div>
+                  )}
+                  {/* End Deletion Confirmation Modal */}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 

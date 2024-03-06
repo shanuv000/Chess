@@ -1,71 +1,78 @@
-import React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
 import { db } from "../../config/firebase";
 import GetChessData from "./GetChessData";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { useEffect } from "react";
 
 const AddChess = () => {
   const [newChessId, setNewChessId] = useState("");
   const chessCollectionRef = collection(db, "chess");
   const [isEmpty, setIsEmpty] = useState(false);
-  // const quantity = 11497655;
-  // console.log(quantity.toString().length);
-  const onAddChessId = async (e) => {
-    e.preventDefault();
-    if (
-      newChessId === 0 ||
-      isNaN(newChessId) ||
-      newChessId.toString().length !== 8
-    ) {
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const validateChessId = (id) => {
+    const isValid = !isNaN(id) && id.toString().length === 8;
+    return isValid;
+  };
+
+  const onAddChessId = async () => {
+    if (!validateChessId(newChessId)) {
       setIsEmpty(true);
       setNewChessId("");
       setTimeout(() => {
         setIsEmpty(false);
       }, 3000);
-
       return;
     }
+
     try {
       await addDoc(chessCollectionRef, {
         gameNum: newChessId,
         timestamp: serverTimestamp(),
       });
-
-      //   getMovieList();
+      setIsSuccess(true);
+      setNewChessId("");
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000);
     } catch (err) {
-      console.err(err);
+      console.error(err);
     }
-    await setNewChessId("");
   };
 
   return (
-    <div className="container text-center mt-4">
+    <div className="container mt-4">
       <div className="row">
-        <div className="col-8">
-          <input
-            class="form-control"
-            type="text"
-            inputMode="numeric"
-            placeholder="Enter game Id"
-            value={newChessId}
-            onChange={(e) => setNewChessId(e.target.value)}
-          />
-          <button
-            type="button"
-            class="btn btn-outline-primary m-2"
-            onClick={onAddChessId}
-          >
-            Submit
-          </button>
+        <div className="col-md-8 mx-auto">
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter game ID"
+              value={newChessId}
+              onChange={(e) => setNewChessId(e.target.value)}
+            />
+            <button
+              type="button"
+              className="btn btn-outline-primary"
+              onClick={onAddChessId}
+            >
+              Submit
+            </button>
+          </div>
           {isEmpty && (
-            <div class="alert alert-danger mt-2  " role="alert">
-              Please Insert valid inputs..
+            <div className="alert alert-danger" role="alert">
+              Please insert a valid 8-digit game ID.
+            </div>
+          )}
+          {isSuccess && (
+            <div className="alert alert-success" role="alert">
+              Chess game added successfully!
             </div>
           )}
         </div>
-        <div className="col-12">
+      </div>
+      <div className="row mt-4">
+        <div className="col-md-12">
           <GetChessData />
         </div>
       </div>

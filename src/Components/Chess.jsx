@@ -1,71 +1,76 @@
-import React from "react";
-import moment from "moment"; // Import the moment library
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { db } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
 import Loader from "./Loader";
 
 const Chess = () => {
-  const [chessListId, setChessListId] = useState([]);
+  const [chessList, setChessList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const chessCollectionRef = collection(db, "chess");
-  const [load, setLoad] = useState(0);
-  // Getting Chess Data
 
   const getChessList = async () => {
-    // Read the Data
-    // Set the movie list
     try {
-      const data = await getDocs(chessCollectionRef);
-      const filterData = data.docs.map((doc) => ({
+      const querySnapshot = await getDocs(chessCollectionRef);
+      const chessData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-      setChessListId(filterData);
-
-      // console.log(filterData);
-    } catch (err) {
-      console.error(err);
+      setChessList(chessData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const sortChessListByTimestamp = () => {
+    return [...chessList].sort(
+      (a, b) => b.timestamp?.toDate() - a.timestamp?.toDate()
+    );
+  };
+
   useEffect(() => {
     getChessList();
-    setTimeout(() => {
-      setLoad(1);
-    }, 2000);
   }, []);
 
-  if (load === 0) {
+  if (isLoading) {
     return <Loader />;
   }
 
   return (
-    <div className="row p-1">
-      {chessListId.map((ids) => {
-        return (
-          <div className="col-sm-12  col-lg-4  mt-sm-1 mt-lg-2 ">
-            {/* {console.log(ids.timestamp)} */}
-            <p style={{ color: "blue" }}>
-              {ids.timestamp
-                ? moment(ids.timestamp.toDate()).format("MMM Do YY")
-                : moment().format("MMM Do YY")}
-            </p>
-            <iframe
-              // className="ratio ratio-1x1"
-              title={`chess ${ids.id}`}
-              id={ids}
-              // allowTransparency="true"
-              frameBorder={0}
-              style={{
-                width: "100%",
-                border: "none",
-                height: "700px",
-                // height='100%'
-              }}
-              src={`//www.chess.com/emboard?id=${ids.gameNum}`}
-            />
+    <div className="container mt-4">
+      <h2 className="text-center mb-4">Chess Game</h2>
+
+      <div className="row row-cols-1 row-cols-lg-3 g-4">
+        {sortChessListByTimestamp().map((chess) => (
+          <div key={chess.id} className="col mb-4">
+            <div className="card h-100">
+              <div className="card-body">
+                <p className="card-text">
+                  <small className="text-muted">
+                    {chess.timestamp
+                      ? moment(chess.timestamp.toDate()).format("MMM Do YYYY")
+                      : moment().format("MMM Do YYYY")}
+                  </small>
+                </p>
+                <iframe
+                  title={`chess ${chess.id}`}
+                  id={chess.id}
+                  frameBorder={0}
+                  style={{
+                    width: "100%",
+                    border: "none",
+                    height: "600px", // Adjusted height for better visibility
+                  }}
+                  src={`//www.chess.com/emboard?id=${chess.gameNum}`}
+                />
+              </div>
+            </div>
           </div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 };
