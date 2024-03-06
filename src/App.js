@@ -1,32 +1,50 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes, Link } from "react-router-dom";
-import Home from "./Pages/Home";
-import Admin from "./Pages/Admin";
-// import { chessId, imagess } from "./assets/apis";
-import Currencies from "./Pages/Currencies";
-import CurrencyConverterComponent from "./Pages/CurrencyConverterComponent";
+import Loader from "./Components/Loader";
+const Home = lazy(() => import("./Pages/Home"));
+const Admin = lazy(() => import("./Pages/Admin"));
 
 function App() {
   return (
     <>
       <nav>
         <ul>
-          <li className="d-flex flex-row mb-3 p-2 justify-content-evenly">
-            {/* <Link to="/">Home</Link>
-            <Link to="/admin">admin</Link>
-            <Link to="/currencies">currencies</Link>
-            <Link to="/currencies2">currencies 2</Link> */}
-          </li>
+          <li className="d-flex flex-row mb-3 p-2 justify-content-evenly"></li>
         </ul>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/admin" element={<Admin />}></Route>
-        {/* <Route
-          path="/currencies2"
-          element={<CurrencyConverterComponent />}
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Home />
+            </Suspense>
+          }
         ></Route>
-        <Route path="/currencies" element={<Currencies />}></Route> */}
+        <Route
+          path="/admin"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Admin />
+            </Suspense>
+          }
+        ></Route>
+        {/* <Route
+          path="/currencies"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <Currencies />
+            </Suspense>
+          }
+        ></Route>
+        <Route
+          path="/currencies2"
+          element={
+            <Suspense fallback={<div>Loading...</div>}>
+              <CurrencyConverterComponent />
+            </Suspense>
+          }
+        ></Route> */}
       </Routes>
     </>
   );
