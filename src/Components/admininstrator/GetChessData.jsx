@@ -68,65 +68,126 @@ const GetChessData = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h2 className="text-center mb-4">Chess Game List</h2>
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered">
-          <thead className="table-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Chess ID</th>
-              <th scope="col">Added On</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {chessList.map((chess, index) => (
-              <tr key={chess.id}>
-                <th scope="row">{index + 1}</th>
-                <td>{chess.gameNum}</td>
-                <td>
-                  {chess.timestamp ? (
-                    <>{moment(chess.timestamp.toDate()).calendar()}</>
-                  ) : (
-                    <>No timestamp available</>
-                  )}
-                </td>
-                <td>
-                  <div className="btn-group" role="group">
+    <div className="table-responsive">
+      <table className="table table-striped table-bordered mt-4">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Chess ID</th>
+            <th scope="col">Added On</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          {chessList.map((chess, index) => (
+            <tr key={chess.id}>
+              <th scope="row">{index + 1}</th>
+              <td>{chess.gameNum}</td>
+              <td>
+                {chess.timestamp ? (
+                  <>{moment(chess.timestamp.toDate()).calendar()}</>
+                ) : (
+                  <>No timestamp available</>
+                )}
+              </td>
+              <td>
+                <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => handleDeleteConfirmation(chess.id)}
+                >
+                  Delete
+                </button>
+
+                {/* Deletion Confirmation Modal */}
+                {deleteConfirmationId === chess.id && (
+                  <div
+                    className="modal fade show"
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="deleteConfirmationModal"
+                    style={{ display: "block" }}
+                  >
+                    <div className="modal-dialog" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5
+                            className="modal-title"
+                            id="deleteConfirmationModalLabel"
+                          >
+                            Confirm Deletion
+                          </h5>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            onClick={() => setDeleteConfirmationId(null)}
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          Are you sure you want to delete this chess game?
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                            onClick={() => setDeleteConfirmationId(null)}
+                          >
+                            Close
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={() => handleDeleteChess(chess.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* End Deletion Confirmation Modal */}
+              </td>
+              <td>
+                {editChessId === chess.id ? (
+                  <>
+                    <input
+                      className="form-control"
+                      placeholder="Update title"
+                      value={updatedGameNum}
+                      onChange={(e) => setUpdatedGameNum(e.target.value)}
+                    />
                     <button
-                      className="btn btn-danger btn-sm"
-                      onClick={() => handleDeleteConfirmation(chess.id)}
+                      className="btn btn-primary btn-sm ms-1"
+                      onClick={handleUpdateChess}
                     >
-                      Delete
+                      Update
                     </button>
+                    <button
+                      className="btn btn-secondary btn-sm ms-1"
+                      onClick={() => setEditChessId("")}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <>
                     <button
                       className="btn btn-warning btn-sm"
                       onClick={() => handleEditToggle(chess.id, chess.gameNum)}
                     >
                       Edit
                     </button>
-                  </div>
-
-                  {/* Deletion Confirmation Modal */}
-                  {deleteConfirmationId === chess.id && (
-                    <div
-                      className="modal fade show"
-                      tabIndex="-1"
-                      role="dialog"
-                      aria-labelledby="deleteConfirmationModal"
-                      style={{ display: "block" }}
-                    >
-                      {/* Modal Content */}
-                    </div>
-                  )}
-                  {/* End Deletion Confirmation Modal */}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  </>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
