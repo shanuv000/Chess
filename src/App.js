@@ -29,22 +29,6 @@ function App() {
             </Suspense>
           }
         ></Route>
-        {/* <Route
-          path="/currencies"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Currencies />
-            </Suspense>
-          }
-        ></Route>
-        <Route
-          path="/currencies2"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <CurrencyConverterComponent />
-            </Suspense>
-          }
-        ></Route> */}
       </Routes>
     </>
   );
