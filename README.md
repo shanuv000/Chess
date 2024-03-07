@@ -1,5 +1,7 @@
 # Welcome to My Chess Game! 🌟
 
+![GitHub repo size](https://img.shields.io/github/repo-size/shanuv000/Chess)
+
 ![Chess Board Image](https://www.henrychesssets.com/wp-content/uploads/Batman-Gotham-Cityscape-Themed-Chess-Set.jpg)
 
 Hey there! I'm Vaibhav, and this is the repository where I share my best chess games. Dive into the fascinating world of chess with me on [My Chess Game](https://chess-shanuv000.vercel.app/).
