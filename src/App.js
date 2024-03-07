@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import Loader from "./Components/Loader";
+import Header from "./Components/Header";
+import Contact from "./Components/Contact";
 const Home = lazy(() => import("./Pages/Home"));
 const Admin = lazy(() => import("./Pages/Admin"));
 
@@ -8,6 +10,7 @@ function App() {
   return (
     <>
       <nav>
+        <Header />
         <ul>
           <li className="d-flex flex-row mb-3 p-2 justify-content-evenly"></li>
         </ul>
@@ -29,6 +32,14 @@ function App() {
             </Suspense>
           }
         ></Route>
+        <Route
+          path="/contact"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Contact />
+            </Suspense>
+          }
+        />
       </Routes>
     </>
   );
