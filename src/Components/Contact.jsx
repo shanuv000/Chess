@@ -34,65 +34,88 @@ const Contact = () => {
     }
   };
 
+  const handleWhatsAppClick = () => {
+    const phone = "7903778038"; // Replace with the recipient's phone number
+    const message = `Hi, I'm interested in your services. Can we chat?`;
+
+    const whatsappLink = `https://wa.me/${phone}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.location.href = whatsappLink;
+  };
+
   return (
-    <div className="container">
-      <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="formName" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="formName"
-            placeholder="Your Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            pattern="[A-Za-z\s]{2,}"
-            title="Please enter a valid name (at least 2 characters, letters only)"
-            required
-          />
-        </div>
+    <div className="container mt-5">
+      <div className="card">
+        <div className="card-body">
+          <h2 className="card-title mb-4">Contact Us</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="formName" className="form-label">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="formName"
+                placeholder="Your Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                pattern="[A-Za-z\s]{2,}"
+                title="Please enter a valid name (at least 2 characters, letters only)"
+                required
+              />
+            </div>
 
-        <div className="mb-3">
-          <label htmlFor="formEmail" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="formEmail"
-            placeholder="Your Email"
-            name="email"
-            inputMode="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <div className="mb-3">
+              <label htmlFor="formEmail" className="form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="formEmail"
+                placeholder="Your Email"
+                name="email"
+                inputMode="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <div className="mb-3">
-          <label htmlFor="formMessage" className="form-label">
-            Message
-          </label>
-          <textarea
-            className="form-control"
-            id="formMessage"
-            rows={4}
-            placeholder="Your Message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
-        </div>
+            <div className="mb-3">
+              <label htmlFor="formMessage" className="form-label">
+                Message
+              </label>
+              <textarea
+                className="form-control"
+                id="formMessage"
+                rows={4}
+                placeholder="Your Message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+
+            {/* Additional button for WhatsApp */}
+            <button
+              type="button"
+              className="btn btn-success ms-2"
+              onClick={handleWhatsAppClick}
+            >
+              Contact via WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

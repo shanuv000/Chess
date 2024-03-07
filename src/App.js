@@ -3,6 +3,7 @@ import { Route, Routes, Link } from "react-router-dom";
 import Loader from "./Components/Loader";
 import Header from "./Components/Header";
 import Contact from "./Components/Contact";
+import WhatsAppSender from "./Components/Whatsapp";
 const Home = lazy(() => import("./Pages/Home"));
 const Admin = lazy(() => import("./Pages/Admin"));
 
@@ -37,6 +38,14 @@ function App() {
           element={
             <Suspense fallback={<Loader />}>
               <Contact />
+            </Suspense>
+          }
+        />{" "}
+        <Route
+          path="/whatsapp"
+          element={
+            <Suspense fallback={<Loader />}>
+              <WhatsAppSender />
             </Suspense>
           }
         />
