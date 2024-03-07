@@ -1,5 +1,4 @@
 import React from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 const Header = () => {
   return (
@@ -32,7 +31,6 @@ const Header = () => {
                   Admin
                 </a>
               </li>
-
               <li className="nav-item">
                 <a className="nav-link" href="/contact">
                   Contact
