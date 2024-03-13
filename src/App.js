@@ -6,6 +6,7 @@ import Contact from "./Components/Contact";
 import WhatsAppSender from "./Components/Whatsapp";
 const Home = lazy(() => import("./Pages/Home"));
 const Admin = lazy(() => import("./Pages/Admin"));
+const AboutMe = lazy(() => import("./Pages/AboutMe"));
 
 function App() {
   return (
@@ -22,6 +23,14 @@ function App() {
           element={
             <Suspense fallback={<Loader />}>
               <Home />
+            </Suspense>
+          }
+        ></Route>
+        <Route
+          path="/aboutme"
+          element={
+            <Suspense fallback={<Loader />}>
+              <AboutMe />
             </Suspense>
           }
         ></Route>
