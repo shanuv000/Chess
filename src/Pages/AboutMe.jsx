@@ -82,34 +82,7 @@ const AboutMe = () => {
               <span className="p-2">
                 {userData.is_streamer ? "Streamer" : ""}
               </span>
-              <p>
-                <strong>
-                  <a
-                    className="nav-link"
-                    target="_blank"
-                    href={userData.url}
-                    rel="noopener noreferrer"
-                  >
-                    Go to Website
-                  </a>
-                </strong>
-              </p>
-              <p className="text-capitalize">
-                <strong>Username: </strong>
-                {userData.username}
-              </p>
-              <p>
-                <strong>Followers: </strong> {userData.followers}
-              </p>
-              <p>
-                <strong>Location:</strong> {userData.location}
-              </p>
-              <p className="text-capitalize">
-                <strong>Status: </strong> {userData.status}
-              </p>{" "}
-              <p className="text-capitalize">
-                <strong>league: </strong> {userData.league}
-              </p>
+              {/* Add more details as needed */}
             </div>
           )}
         </div>
