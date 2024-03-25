@@ -37,6 +37,15 @@ const AboutMe = () => {
           verified,
           league,
         } = response.data;
+        const {
+          chess_blitz,
+          chess_daily,
+          chess_rapid,
+          chess_bullet,
+          tactics,
+          puzzle_rush,
+        } = response2.data;
+
         setUserData({
           avatar,
           name,
@@ -51,6 +60,7 @@ const AboutMe = () => {
         });
 
         setStats(response2.data);
+        console.log(response2.data);
       } else {
         setError("Failed to fetch user data");
       }
