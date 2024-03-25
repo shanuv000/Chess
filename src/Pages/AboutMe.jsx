@@ -26,7 +26,6 @@ const AboutMe = () => {
       if (response.status === 200 && response2.status === 200) {
         const {
           avatar,
-          player_id,
           name,
           username,
           followers,
@@ -37,14 +36,6 @@ const AboutMe = () => {
           verified,
           league,
         } = response.data;
-        const {
-          chess_blitz,
-          chess_daily,
-          chess_rapid,
-          chess_bullet,
-          tactics,
-          puzzle_rush,
-        } = response2.data;
 
         setUserData({
           avatar,
@@ -60,7 +51,6 @@ const AboutMe = () => {
         });
 
         setStats(response2.data);
-        console.log(response2.data);
       } else {
         setError("Failed to fetch user data");
       }
@@ -145,9 +135,9 @@ const AboutMe = () => {
             </div>
           </div>
         </div>
-        {/* <div className="col-md-8">
+        <div className="col-md-8">
           <Statss stats={stats} />
-        </div> */}
+        </div>
       </div>
     </div>
   );
