@@ -30,7 +30,6 @@ const AboutMe = () => {
           name,
           username,
           followers,
-          country,
           location,
           joined,
           status,
@@ -43,7 +42,6 @@ const AboutMe = () => {
           name,
           username,
           followers,
-          country,
           location,
           joined,
           status,
@@ -51,6 +49,7 @@ const AboutMe = () => {
           verified,
           league,
         });
+
         setStats(response2.data);
       } else {
         setError("Failed to fetch user data");
@@ -88,7 +87,6 @@ const AboutMe = () => {
     avatar,
     username,
     followers,
-    country,
     location,
     joined,
     status,
@@ -99,8 +97,8 @@ const AboutMe = () => {
 
   return (
     <div className="container mt-5">
-      <div className="row">
-        <div className="col-12">
+      <div className="row mt-3">
+        <div className="col-md-12">
           <form className="d-flex flex-row" onSubmit={handleSubmit}>
             <input
               className="form-control mb-2 p-2"
@@ -114,27 +112,32 @@ const AboutMe = () => {
             </button>
           </form>
         </div>
-        <div className="col-12 text-center">
-          <h1>{name}</h1>
-          <img
-            src={avatar}
-            alt="User Avatar"
-            className="rounded-circle img-fluid"
-            style={{ width: "150px", height: "150px" }}
-          />
-          <p>Username: {username}</p>
-          <p>Followers: {followers}</p>
-          <p>Country: {country}</p>
-          <p>Location: {location}</p>
-          <p>Joined: {joined}</p>
-          <p>Status: {status}</p>
-          <p>{is_streamer ? "Streamer" : ""}</p>
-          <p>{verified ? "Verified" : ""}</p>
-          <p>League: {league}</p>
+      </div>
+      <div className="row justify-content-center align-items-center">
+        <div className="col-md-4">
+          <div className="card">
+            <div className="card-body text-center">
+              <img
+                src={avatar}
+                alt="User Avatar"
+                className="rounded-circle img-fluid mb-3"
+                style={{ width: "150px", height: "150px" }}
+              />
+              <h4 className="card-title">{name}</h4>
+              <p className="card-text">Username: {username}</p>
+              <p className="card-text">Followers: {followers}</p>
+              <p className="card-text">Location: {location}</p>
+              <p className="card-text">Joined: {joined}</p>
+              <p className="card-text">Status: {status}</p>
+              <p className="card-text">{is_streamer ? "Streamer" : ""}</p>
+              <p className="card-text">{verified ? "Verified" : ""}</p>
+              <p className="card-text">League: {league}</p>
+            </div>
+          </div>
         </div>
-        <div className="col-12">
+        {/* <div className="col-md-8">
           <Statss stats={stats} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
