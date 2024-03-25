@@ -24,7 +24,33 @@ const AboutMe = () => {
       );
 
       if (response.status === 200 && response2.status === 200) {
-        setUserData(response.data);
+        const {
+          avatar,
+          player_id,
+          name,
+          username,
+          followers,
+          country,
+          location,
+          joined,
+          status,
+          is_streamer,
+          verified,
+          league,
+        } = response.data;
+        setUserData({
+          avatar,
+          name,
+          username,
+          followers,
+          country,
+          location,
+          joined,
+          status,
+          is_streamer,
+          verified,
+          league,
+        });
         setStats(response2.data);
       } else {
         setError("Failed to fetch user data");
@@ -57,6 +83,20 @@ const AboutMe = () => {
     return <div>Error: {error}</div>;
   }
 
+  const {
+    name,
+    avatar,
+    username,
+    followers,
+    country,
+    location,
+    joined,
+    status,
+    is_streamer,
+    verified,
+    league,
+  } = userData;
+
   return (
     <div className="container mt-5">
       <div className="row">
@@ -75,19 +115,22 @@ const AboutMe = () => {
           </form>
         </div>
         <div className="col-12 text-center">
-          <h1>{userData ? userData.name : ""}</h1>
-          <div>
-            <img
-              width={"70%"}
-              src={userData.avatar}
-              className="rounded my-2"
-              alt="User Avatar"
-            />
-            <span className="p-2">
-              {userData.is_streamer ? "Streamer" : ""}
-            </span>
-            {/* Add more details as needed */}
-          </div>
+          <h1>{name}</h1>
+          <img
+            src={avatar}
+            alt="User Avatar"
+            className="rounded-circle img-fluid"
+            style={{ width: "150px", height: "150px" }}
+          />
+          <p>Username: {username}</p>
+          <p>Followers: {followers}</p>
+          <p>Country: {country}</p>
+          <p>Location: {location}</p>
+          <p>Joined: {joined}</p>
+          <p>Status: {status}</p>
+          <p>{is_streamer ? "Streamer" : ""}</p>
+          <p>{verified ? "Verified" : ""}</p>
+          <p>League: {league}</p>
         </div>
         <div className="col-12">
           <Statss stats={stats} />
