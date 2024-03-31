@@ -155,13 +155,13 @@ const GetChessData = () => {
                 {editChessId === chess.id ? (
                   <>
                     <input
-                      className="form-control"
+                      className="form-control "
                       placeholder="Update title"
                       value={updatedGameNum}
                       onChange={(e) => setUpdatedGameNum(e.target.value)}
                     />
                     <button
-                      className="btn btn-primary btn-sm ms-1"
+                      className="btn add_button ms-1"
                       onClick={handleUpdateChess}
                     >
                       Update
@@ -176,7 +176,7 @@ const GetChessData = () => {
                 ) : (
                   <>
                     <button
-                      className="btn btn-warning btn-sm"
+                      className="btn add_button"
                       onClick={() => handleEditToggle(chess.id, chess.gameNum)}
                     >
                       Edit

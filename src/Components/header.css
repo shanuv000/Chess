@@ -1,0 +1,29 @@
+.text_white,
+.nav-link {
+  color: #ffffff;
+}
+.add_button {
+  background: #81b64c;
+  color: #ffffff;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transition multiple properties */
+  border: none;
+  /* padding: 10px 20px; Add padding for a more standard button size */
+  cursor: pointer; /* Indicate interactivity */
+}
+
+.add_button:hover {
+  background-color: #6ba035;
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  outline: 2px solid #4b8225;
+  outline-offset: 2px;
+}
+
+.add_button:focus {
+  /* Improve accessibility */
+  outline: 2px solid #4b8225;
+  outline-offset: 2px;
+}
+
+.delete_button {
+}

@@ -1,15 +1,18 @@
 import React from "react";
-
+import "./header.css";
 const Header = () => {
   return (
-    <header className="bg-dark text-white">
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-dark">
-          <a className="navbar-brand" href="/">
+    <header
+      className=" text-white"
+      style={{ background: "#81b64c", color: "#FFFFFF" }}
+    >
+      <div className="container text_white">
+        <nav className="navbar navbar-expand-lg text_white ">
+          <a className="navbar-brand text_white" href="/">
             My Chess
           </a>
           <button
-            className="navbar-toggler"
+            className="navbar-toggler text_white"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -17,17 +20,17 @@ const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon "></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <a className="nav-link text_white" href="/">
                   Home
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/admin">
+              <li className="nav-item ">
+                <a className="nav-link text_white" href="/admin">
                   Admin
                 </a>
               </li>{" "}

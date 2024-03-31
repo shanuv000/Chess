@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { db } from "../../config/firebase";
 import GetChessData from "./GetChessData";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import "../header.css";
 
 const AddChess = () => {
   const [newChessId, setNewChessId] = useState("");
@@ -54,7 +55,8 @@ const AddChess = () => {
             />
             <button
               type="button"
-              className="btn btn-outline-primary"
+              className="btn  add_button"
+              style={{}}
               onClick={onAddChessId}
             >
               Submit
