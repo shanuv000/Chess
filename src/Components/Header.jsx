@@ -33,12 +33,12 @@ const Header = () => {
                 <a className="nav-link text_white" href="/admin">
                   Admin
                 </a>
-              </li>{" "}
-              <li className="nav-item">
+              </li>
+              {/* <li className="nav-item">
                 <a className="nav-link" href="/aboutme">
                   About Me
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <a className="nav-link" href="/contact">
                   Contact
