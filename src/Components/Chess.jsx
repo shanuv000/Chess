@@ -5,12 +5,18 @@ import { getDocs, collection } from "firebase/firestore";
 import Loader from "./Loader";
 import { Resizable } from "react-resizable";
 import "../App.css";
+import Pagination from "react-paginate";
 
 const Chess = () => {
   const [chessList, setChessList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const chessCollectionRef = collection(db, "chess");
+
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+  };
 
   const getChessList = async () => {
     try {
@@ -46,12 +52,18 @@ const Chess = () => {
     element.style.height = `${size.height}px`;
   };
 
+  // Pagination logic
+  const paginatedChessList = sortChessListByTimestamp().slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+
   return (
     <div className="container mt-4">
       <h2 className="text-center mb-4">Chess Game</h2>
 
       <div className="row row-cols-1 row-cols-lg-3 g-4">
-        {sortChessListByTimestamp().map((chess) => (
+        {paginatedChessList.map((chess) => (
           <div key={chess.id} className="col mb-4">
             <div className="card h-100">
               {" "}
@@ -83,6 +95,26 @@ const Chess = () => {
           </div>
         ))}
       </div>
+
+      <Pagination
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        breakLabel={"..."}
+        pageCount={Math.ceil(chessList.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination justify-content-center"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        previousClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextClassName={"page-item"}
+        nextLinkClassName={"page-link"}
+        breakClassName={"page-item"}
+        breakLinkClassName={"page-link"}
+        activeClassName={"active"}
+      />
     </div>
   );
 };
