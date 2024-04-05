@@ -73,9 +73,12 @@ const Chess = () => {
                 onResize={onResize}
                 className="resizable-iframe"
               >
-                <div className="card-body chess-card-body p-0 m-0">
-                  <p className="card-text">
-                    <small className="text-muted">
+                <div
+                  className="card-body chess-card-body p-0 m-0"
+                  style={{ color: "white" }}
+                >
+                  <p className="card-text" style={{ color: "white" }}>
+                    <small className="text-muted" style={{ color: "white" }}>
                       {chess.timestamp
                         ? moment(chess.timestamp.toDate()).format("MMM Do YYYY")
                         : moment().format("MMM Do YYYY")}

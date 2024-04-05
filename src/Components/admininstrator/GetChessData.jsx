@@ -75,8 +75,8 @@ const GetChessData = () => {
             <th scope="col">#</th>
             <th scope="col">Chess ID</th>
             <th scope="col">Added On</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Edit</th>
+            {/* <th scope="col">Delete</th>
+            <th scope="col">Edit</th> */}
           </tr>
         </thead>
         <tbody>
@@ -92,66 +92,11 @@ const GetChessData = () => {
                 )}
               </td>
               <td>
-                <button
-                  className="btn btn-danger btn-sm"
-                  onClick={() => handleDeleteConfirmation(chess.id)}
-                >
-                  Delete
-                </button>
-
                 {/* Deletion Confirmation Modal */}
-                {deleteConfirmationId === chess.id && (
-                  <div
-                    className="modal fade show"
-                    tabIndex="-1"
-                    role="dialog"
-                    aria-labelledby="deleteConfirmationModal"
-                    style={{ display: "block" }}
-                  >
-                    <div className="modal-dialog" role="document">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h5
-                            className="modal-title"
-                            id="deleteConfirmationModalLabel"
-                          >
-                            Confirm Deletion
-                          </h5>
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            onClick={() => setDeleteConfirmationId(null)}
-                          ></button>
-                        </div>
-                        <div className="modal-body">
-                          Are you sure you want to delete this chess game?
-                        </div>
-                        <div className="modal-footer">
-                          <button
-                            type="button"
-                            className="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                            onClick={() => setDeleteConfirmationId(null)}
-                          >
-                            Close
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-danger"
-                            onClick={() => handleDeleteChess(chess.id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+
                 {/* End Deletion Confirmation Modal */}
               </td>
-              <td>
+              {/* <td>
                 {editChessId === chess.id ? (
                   <>
                     <input
@@ -183,7 +128,7 @@ const GetChessData = () => {
                     </button>
                   </>
                 )}
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
