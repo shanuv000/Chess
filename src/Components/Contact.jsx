@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../config/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-
+import axios from "axios";
 const Contact = () => {
+  const [ip, setIP] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
+    ip: "",
   });
-
+  const getIPaddress = async () => {
+    const res = await axios.get("https://api.ipify.org/?format=json");
+    console.log(res.data);
+    setIP(res.data.ip);
+  };
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      ip: ip,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -43,9 +53,14 @@ const Contact = () => {
     )}`;
     window.location.href = whatsappLink;
   };
-
+  useEffect(() => {
+    //passing getData method to the lifecycle method
+    getIPaddress();
+  }, []);
   return (
     <div className="container mt-5">
+      <h2>Your IP Address is</h2>
+      <h4>{ip}</h4>
       <div className="card">
         <div className="card-body">
           <h2 className="card-title mb-4">Contact Us</h2>
