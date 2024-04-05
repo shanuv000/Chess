@@ -4,7 +4,7 @@ import GetChessData from "./GetChessData";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import "../header.css";
 
-const AddChess = () => {
+const AddChess = ({ updateChess }) => {
   const [newChessId, setNewChessId] = useState("");
   const chessCollectionRef = collection(db, "chess");
   const [isEmpty, setIsEmpty] = useState(false);
@@ -35,6 +35,7 @@ const AddChess = () => {
       setTimeout(() => {
         setIsSuccess(false);
       }, 3000);
+      updateChess();
     } catch (err) {
       console.error(err);
     }
@@ -72,11 +73,6 @@ const AddChess = () => {
               Chess game added successfully!
             </div>
           )}
-        </div>
-      </div>
-      <div className="row mt-4">
-        <div className="col-md-12">
-          <GetChessData />
         </div>
       </div>
     </div>

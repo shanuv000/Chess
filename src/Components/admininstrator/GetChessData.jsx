@@ -9,6 +9,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
+import AddChess from "./AddChess";
 
 const GetChessData = () => {
   const { getChessList } = useContext(FirebaseContext);
@@ -68,35 +69,37 @@ const GetChessData = () => {
   };
 
   return (
-    <div className="table-responsive">
-      <table className="table table-striped table-bordered mt-4">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Chess ID</th>
-            <th scope="col">Added On</th>
-            {/* <th scope="col">Delete</th>
+    <>
+      <AddChess updateChess={fetchChessList} />
+      <div className="table-responsive">
+        <table className="table table-striped table-bordered mt-4">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Chess ID</th>
+              <th scope="col">Added On</th>
+              {/* <th scope="col">Delete</th>
             <th scope="col">Edit</th> */}
-          </tr>
-        </thead>
-        <tbody>
-          {chessList.map((chess, index) => (
-            <tr key={chess.id}>
-              <th scope="row">{index + 1}</th>
-              <td>{chess.gameNum}</td>
-              <td>
-                {chess.timestamp ? (
-                  <>{moment(chess.timestamp.toDate()).calendar()}</>
-                ) : (
-                  <>No timestamp available</>
-                )}
-              </td>
-              <td>
-                {/* Deletion Confirmation Modal */}
+            </tr>
+          </thead>
+          <tbody>
+            {chessList.map((chess, index) => (
+              <tr key={chess.id}>
+                <th scope="row">{index + 1}</th>
+                <td>{chess.gameNum}</td>
+                <td>
+                  {chess.timestamp ? (
+                    <>{moment(chess.timestamp.toDate()).calendar()}</>
+                  ) : (
+                    <>No timestamp available</>
+                  )}
+                </td>
+                <td>
+                  {/* Deletion Confirmation Modal */}
 
-                {/* End Deletion Confirmation Modal */}
-              </td>
-              {/* <td>
+                  {/* End Deletion Confirmation Modal */}
+                </td>
+                {/* <td>
                 {editChessId === chess.id ? (
                   <>
                     <input
@@ -129,11 +132,12 @@ const GetChessData = () => {
                   </>
                 )}
               </td> */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 };
 
