@@ -9,17 +9,19 @@ const Contact = () => {
     email: "",
     message: "",
     ip: "",
+    platform: "",
   });
   const getIPaddress = async () => {
-    const res = await axios.get("https://api.ipify.org/?format=json");
-    console.log(res.data);
-    setIP(res.data.ip);
+    const getIP = await axios.get("https://api.ipify.org/?format=json");
+    console.log(getIP.data);
+    setIP(getIP.data.ip);
   };
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
       ip: ip,
+      platform: "chess",
     });
   };
 
@@ -59,8 +61,6 @@ const Contact = () => {
   }, []);
   return (
     <div className="container mt-5">
-      <h2>Your IP Address is</h2>
-      <h4>{ip}</h4>
       <div className="card">
         <div className="card-body">
           <h2 className="card-title mb-4">Contact Us</h2>
