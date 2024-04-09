@@ -7,7 +7,6 @@ import WhatsAppSender from "./Components/Whatsapp";
 const Home = lazy(() => import("./Pages/Home"));
 const Admin = lazy(() => import("./Pages/Admin"));
 const AboutMe = lazy(() => import("./Pages/AboutMe"));
-
 function App() {
   return (
     <>
