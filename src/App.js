@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { getIPAddress, addDataToFirebase } from "./ExtractIPs/ipfunc";
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Loader from "./Components/Loader";
 import Header from "./Components/Header";
 import Contact from "./Components/Contact";
@@ -14,6 +14,10 @@ function App() {
   });
   // Extracting IPs
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      console.log("Hello, World!");
+      fetchData();
+    }, 10000);
     const fetchData = async () => {
       if (sendData.ip === "") {
         const ipData = await getIPAddress();
@@ -22,6 +26,12 @@ function App() {
       addDataToFirebase(sendData);
     };
     fetchData();
+    return () => {
+      clearTimeout(timeoutId);
+      setSendData({
+        ip: "",
+      });
+    };
   }, [sendData]);
   return (
     <>
