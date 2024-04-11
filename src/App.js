@@ -1,4 +1,5 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { getIPAddress, addDataToFirebase } from "./ExtractIPs/ipfunc";
 import { Route, Routes, Link } from "react-router-dom";
 import Loader from "./Components/Loader";
 import Header from "./Components/Header";
@@ -8,6 +9,19 @@ const Home = lazy(() => import("./Pages/Home"));
 const Admin = lazy(() => import("./Pages/Admin"));
 const AboutMe = lazy(() => import("./Pages/AboutMe"));
 function App() {
+  const [sendData, setSendData] = useState({
+    ip: "",
+  });
+  useEffect(() => {
+    const fetchData = async () => {
+      if (sendData.ip === "") {
+        const ipData = await getIPAddress();
+        setSendData(ipData);
+      }
+      addDataToFirebase(sendData);
+    };
+    fetchData();
+  }, [sendData]);
   return (
     <>
       <nav>
