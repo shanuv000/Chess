@@ -12,6 +12,7 @@ function App() {
   const [sendData, setSendData] = useState({
     ip: "",
   });
+  // Extracting IPs
   useEffect(() => {
     const fetchData = async () => {
       if (sendData.ip === "") {

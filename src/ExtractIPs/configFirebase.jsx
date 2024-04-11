@@ -15,7 +15,7 @@ const add_data = async ({ sendData }) => {
   // console.log(sendData);
   try {
     await runTransaction(db, async (transaction) => {
-      const docRef = doc(db, "chess", data.ip);
+      const docRef = doc(db, "IPaddress", data.ip);
       //   console.log("data.ip:", data.ip);
 
       const docSnapshot = await transaction.get(docRef);
