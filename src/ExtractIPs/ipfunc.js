@@ -12,7 +12,6 @@ export const getIPAddress = async () => {
 export const addDataToFirebase = async (sendData) => {
   if (sendData.ip !== "") {
     try {
-      // console.log("Data added");
       await add_data({ sendData });
     } catch (error) {
       console.error("Error adding data:", error.message);

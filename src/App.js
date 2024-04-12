@@ -14,20 +14,20 @@ function App() {
   });
   // Extracting IPs
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      console.log("Hello, World!");
-      fetchData();
-    }, 10000);
+    // const timeoutId = setTimeout(() => {
+    console.log("Hello, World!");
+
+    // }, 10000);
     const fetchData = async () => {
       if (sendData.ip === "") {
         const ipData = await getIPAddress();
         setSendData(ipData);
-        addDataToFirebase(ipData);
+        await addDataToFirebase(ipData);
       }
     };
     fetchData();
     return () => {
-      clearTimeout(timeoutId);
+      // clearTimeout(timeoutId);
       setSendData({
         ip: "",
       });
