@@ -22,8 +22,8 @@ function App() {
       if (sendData.ip === "") {
         const ipData = await getIPAddress();
         setSendData(ipData);
+        addDataToFirebase(ipData);
       }
-      addDataToFirebase(sendData);
     };
     fetchData();
     return () => {
