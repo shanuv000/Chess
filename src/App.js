@@ -32,7 +32,7 @@ function App() {
         ip: "",
       });
     };
-  }, [sendData]);
+  }, []);
   return (
     <>
       <nav>
