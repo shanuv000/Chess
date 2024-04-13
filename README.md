@@ -14,7 +14,7 @@ Hey there! I'm Vaibhav, and this is the repository where I share my best chess g
 
 ## Live Demo 🚀
 
-Experience the magic of chess at [https://chess-shanuv000.vercel.app/](https://chess-shanuv000.vercel.app/). Your move!
+Experience the magic of chess at [https://chess-green-two.vercel.app/](https://chess-shanuv000.vercel.app/). Your move!
 
 ## Features 🌈
 
