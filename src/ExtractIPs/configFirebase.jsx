@@ -13,7 +13,7 @@ import {
 const add_data = async ({ sendData }) => {
   // console.log("firebase Location", location.accuracy);
   const data = { ...sendData, platform: "chess" };
-  // console.log(sendData);
+  const heyPlatform = data.platform;
   try {
     await runTransaction(db, async (transaction) => {
       const docRef = doc(db, "IPaddress", data.ip);
@@ -28,12 +28,12 @@ const add_data = async ({ sendData }) => {
           ...data,
           updatedTimeStamp: serverTimestamp(),
         });
-        console.log("Document updated successfully!");
-        console.log("IP address already exists. Updated with new data.");
+        console.log(`${heyPlatform} Document updated successfully!`);
+        console.log("address already exists. Updated with new data.");
       } else {
         // Add new document
         transaction.set(docRef, { ...data, timestamp: serverTimestamp() });
-        console.log("New document added successfully!");
+        console.log(`${heyPlatform} added successfully!`);
       }
     });
 
