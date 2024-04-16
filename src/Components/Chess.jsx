@@ -41,7 +41,9 @@ const Chess = () => {
 
   useEffect(() => {
     getChessList();
+    // console.clear();
   }, []);
+  // console.clear();
 
   if (isLoading) {
     return <Loader />;

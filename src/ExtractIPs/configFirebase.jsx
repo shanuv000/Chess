@@ -11,6 +11,7 @@ import {
 // const biodataRef = collection(db, "IPaddress");
 
 const add_data = async ({ sendData }) => {
+  // console.log("firebase Location", location.accuracy);
   const data = { ...sendData, platform: "chess" };
   // console.log(sendData);
   try {

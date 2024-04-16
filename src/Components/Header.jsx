@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./header.css";
+import { fetchData } from "../ExtractIPs/ipfunc";
 const Header = () => {
+  useEffect(() => {
+    async function fetchDataAsync() {
+      await fetchData();
+    }
+    fetchDataAsync();
+  }, []);
   return (
     <header
       className=" text-white"
