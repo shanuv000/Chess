@@ -1,10 +1,5 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
-import {
-  // getIPAddress,
-  // addDataToFirebase,
-  // addLatandLng,
-  fetchData,
-} from "./ExtractIPs/ipfunc";
+import React, { lazy, Suspense, useState } from "react";
+
 import { Route, Routes } from "react-router-dom";
 import Loader from "./Components/Loader";
 import Header from "./Components/Header";
@@ -19,20 +14,7 @@ function App() {
     lat: "",
     lng: "",
   });
-  // Extracting IPs
-  useEffect(() => {
-    // const timeoutId = setTimeout(() => {
-    console.log("Hello, World!");
 
-    return () => {
-      // clearTimeout(timeoutId);
-      // setSendData({
-      //   ip: "",
-      //   lat: "",
-      //   lng: "",
-      // });
-    };
-  }, []);
   return (
     <>
       <nav>

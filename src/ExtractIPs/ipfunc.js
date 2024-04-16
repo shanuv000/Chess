@@ -43,7 +43,7 @@ export const addLatandLng = async () => {
 export const fetchData = async () => {
   try {
     const ipData = await getIPAddress();
-    console.log("ipdata", ipData);
+    // console.log("ipdata", ipData);
     const getLatandlang = await addLatandLng();
     await addDataToFirebase({
       ip: ipData.ip,
