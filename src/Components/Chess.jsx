@@ -3,7 +3,6 @@ import moment from "moment";
 import { db } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
 import Loader from "./Loader";
-import { Resizable } from "react-resizable";
 import "../App.css";
 import Pagination from "react-paginate";
 
@@ -68,34 +67,26 @@ const Chess = () => {
         {paginatedChessList.map((chess) => (
           <div key={chess.id} className="col mb-4">
             <div className="card h-100">
-              {" "}
-              <Resizable
-                width={"100%"}
-                height={500}
-                onResize={onResize}
-                className="resizable-iframe"
+              <div
+                className="card-body chess-card-body p-0 m-0"
+                style={{ color: "white", height: "80vw" }}
               >
-                <div
-                  className="card-body chess-card-body p-0 m-0"
-                  style={{ color: "white" }}
-                >
-                  <p className="card-text" style={{ color: "white" }}>
-                    <small className="text-muted" style={{ color: "white" }}>
-                      {chess.timestamp
-                        ? moment(chess.timestamp.toDate()).format("MMM Do YYYY")
-                        : moment().format("MMM Do YYYY")}
-                    </small>
-                  </p>
+                <p className="card-text" style={{ color: "white" }}>
+                  <small className="text-muted" style={{ color: "white" }}>
+                    {chess.timestamp
+                      ? moment(chess.timestamp.toDate()).format("MMM Do YYYY")
+                      : moment().format("MMM Do YYYY")}
+                  </small>
+                </p>
 
-                  <iframe
-                    title={`chess ${chess.id}`}
-                    id={chess.id}
-                    frameBorder={0}
-                    style={{ width: "100%", height: "100%" }}
-                    src={`//www.chess.com/emboard?id=${chess.gameNum}`}
-                  />
-                </div>
-              </Resizable>
+                <iframe
+                  title={`chess ${chess.id}`}
+                  id={chess.id}
+                  frameBorder={0}
+                  style={{ width: "100%", height: "100%" }}
+                  src={`//www.chess.com/emboard?id=${chess.gameNum}`}
+                />
+              </div>
             </div>
           </div>
         ))}
