@@ -18,6 +18,7 @@ const Header = () => {
           <a className="navbar-brand text_white" href="/">
             My Chess
           </a>
+
           <button
             className="navbar-toggler text_white"
             type="button"
@@ -29,8 +30,8 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon "></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
+          <div className="collapse navbar-collapse" id="navbarNav  ">
+            <ul className="navbar-nav ms-auto p-2">
               <li className="nav-item">
                 <a className="nav-link text_white" href="/">
                   Home

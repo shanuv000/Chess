@@ -10,27 +10,29 @@ const Chess = () => {
   const [chessList, setChessList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage] = useState(5);
   const chessCollectionRef = collection(db, "chess");
 
-  const handlePageClick = (data) => {
-    setCurrentPage(data.selected);
-  };
+  const checkWidthOfWindow = window.innerWidth > 500;
+  const viewWidth = checkWidthOfWindow ? 50 : 130;
+  useEffect(() => {
+    const getChessList = async () => {
+      try {
+        const querySnapshot = await getDocs(chessCollectionRef);
+        const chessData = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setChessList(chessData);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const getChessList = async () => {
-    try {
-      const querySnapshot = await getDocs(chessCollectionRef);
-      const chessData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setChessList(chessData);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    getChessList();
+  }, [chessCollectionRef]);
 
   const sortChessListByTimestamp = () => {
     return [...chessList].sort(
@@ -38,20 +40,13 @@ const Chess = () => {
     );
   };
 
-  useEffect(() => {
-    getChessList();
-    // console.clear();
-  }, []);
-  // console.clear();
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+  };
 
   if (isLoading) {
     return <Loader />;
   }
-
-  const onResize = (event, { element, size }) => {
-    element.style.width = `${size.width}px`;
-    element.style.height = `${size.height}px`;
-  };
 
   // Pagination logic
   const paginatedChessList = sortChessListByTimestamp().slice(
@@ -69,7 +64,7 @@ const Chess = () => {
             <div className="card h-100">
               <div
                 className="card-body chess-card-body p-0 m-0"
-                style={{ color: "white", height: "80vw" }}
+                style={{ color: "white", height: `${viewWidth}vw` }}
               >
                 <p className="card-text" style={{ color: "white" }}>
                   <small className="text-muted" style={{ color: "white" }}>
