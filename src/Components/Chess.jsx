@@ -81,6 +81,14 @@ const Chess = () => {
                   style={{ width: "100%", height: "100%" }}
                   src={`//www.chess.com/emboard?id=${chess.gameNum}`}
                 />
+                {/* <div class="ratio ratio-16x9">
+                  <iframe
+                    id={chess.id}
+                    src={`//www.chess.com/emboard?id=${chess.gameNum}`}
+                    title={`chess ${chess.id}`}
+                    allowfullscreen
+                  ></iframe>
+                </div> */}
               </div>
             </div>
           </div>
