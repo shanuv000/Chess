@@ -121,13 +121,13 @@ const Contact = () => {
             </button>
 
             {/* Additional button for WhatsApp */}
-            <button
+            {/* <button
               type="button"
               className="btn btn-success ms-2"
               onClick={handleWhatsAppClick}
             >
               Contact via WhatsApp
-            </button>
+            </button> */}
           </form>
         </div>
       </div>

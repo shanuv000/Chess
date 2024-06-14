@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense } from "react";
 
 import { Route, Routes } from "react-router-dom";
 import Loader from "./Components/Loader";
@@ -9,12 +9,6 @@ const Home = lazy(() => import("./Pages/Home"));
 const Admin = lazy(() => import("./Pages/Admin"));
 const AboutMe = lazy(() => import("./Pages/AboutMe"));
 function App() {
-  const [sendData, setSendData] = useState({
-    ip: "",
-    lat: "",
-    lng: "",
-  });
-
   return (
     <>
       <nav>
